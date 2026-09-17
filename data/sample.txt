@@ -1,0 +1,5 @@
+Contextual Query Engine Documentation.
+This engine is built on top of PostgreSQL using the pgvector extension.
+It allows for fast, scalable semantic search over unstructured text.
+By chunking documents and storing their embeddings, we can retrieve the most relevant context and pass it to an LLM to generate highly accurate answers.
+Our optimized indexing strategy reduces latency significantly compared to traditional brute-force cosine similarity searches.
