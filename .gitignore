@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 data/chroma/
+backend/data/
 *.egg-info/
 node_modules/
 dist/
