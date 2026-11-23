@@ -1,17 +1,27 @@
-version: '3.8'
-
 services:
-  db:
-    image: ankane/pgvector:latest
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: rag_db
-    ports:
-      - "5432:5432"
+  ollama:
+    image: ollama/ollama:0.13.0
     volumes:
-      - pgdata:/var/lib/postgresql/data
-    restart: unless-stopped
-
+      - models:/root/.ollama
+  backend:
+    build: .
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+      DATA_DIR: /app/data/chroma
+      MODEL_PROVIDER: ${MODEL_PROVIDER:-auto}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_CHAT_MODEL: ${OPENAI_CHAT_MODEL:-gpt-4o-mini}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+    volumes:
+      - index:/app/data/chroma
+    depends_on:
+      - ollama
+  frontend:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:8080:80"
+    depends_on:
+      - backend
 volumes:
-  pgdata:
+  models:
+  index:
