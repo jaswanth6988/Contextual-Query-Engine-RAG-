@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./banner.svg" alt="Updates in Progress" width="100%"/>
+</p>
+
 # Contextual — PDF RAG workspace
 
 A beginner-friendly, end-to-end app for asking questions about PDFs. Upload a document, index its text, retrieve relevant passages, and get an answer with page-level evidence.
